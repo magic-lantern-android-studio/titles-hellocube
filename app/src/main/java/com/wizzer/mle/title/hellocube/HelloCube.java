@@ -202,7 +202,7 @@ public class HelloCube extends Activity
         try
         {
         	// Set the 'position' property on the actor.
-            byte[] position = createPositionProperty(0.0F, 0.0F, -10.0F);
+            byte[] position = createPositionProperty(0.0F, 0.0F, -5.0F);
             MleProp positionProp = new MleProp(position.length, new ByteArrayInputStream(position));
             cubeActor.setProperty("position", positionProp);
 

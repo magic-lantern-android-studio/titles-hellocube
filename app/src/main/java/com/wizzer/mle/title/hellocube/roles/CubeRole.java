@@ -556,7 +556,7 @@ public class CubeRole extends MleRole implements I3dRole
         Matrix.setIdentityM(m_modelMatrix, 0);
         Matrix.translateM(m_modelMatrix, 0, m_translation[0], m_translation[1], m_translation[2]);
         Matrix.rotateM(m_modelMatrix, 0, m_rotation[0], m_rotation[1], m_rotation[2], m_rotation[3]);
-        // Todo: update scale here.
+        Matrix.scaleM(m_modelMatrix, 0, m_scale[0], m_scale[1], m_scale[2]);
 
         // Pass in the position information.
         m_vertices.position(0);
