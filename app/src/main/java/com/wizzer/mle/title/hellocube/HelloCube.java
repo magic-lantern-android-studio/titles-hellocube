@@ -38,7 +38,7 @@ import com.wizzer.mle.parts.j3d.MleJ3dPlatformData;
 import com.wizzer.mle.parts.stages.Mle3dStage;
 import com.wizzer.mle.parts.sets.Mle3dSet;
 
-// Import Magic Lantern title parts.
+// Import title classes.
 import com.wizzer.mle.title.hellocube.actors.CubeActor;
 import com.wizzer.mle.title.hellocube.roles.CubeRole;
 
@@ -215,6 +215,11 @@ public class HelloCube extends Activity
             byte[] scale = createScaleProperty(1.0F, 1.0F, 1.0F);
             MleProp scaleProp = new MleProp(scale.length, new ByteArrayInputStream(scale));
             cubeActor.setProperty("scale", scaleProp);
+
+            // Set the 'color' property on the actor.
+            byte[] color = createColorProperty(1.0F, 1.0F, 1.0F, 1.0F);
+            MleProp colorProp = new MleProp(color.length, new ByteArrayInputStream(color));
+            cubeActor.setProperty("color", colorProp);
         } catch (MleRuntimeException ex)
         {
         	Log.e(MleTitle.DEBUG_TAG, "Unable to set property.");
@@ -360,6 +365,24 @@ public class HelloCube extends Activity
         MlMath.convertFloatToByteArray(y, property, offset, ByteOrder.BIG_ENDIAN);
         offset += 4;
         MlMath.convertFloatToByteArray(z, property, offset, ByteOrder.BIG_ENDIAN);
+
+        return property;
+    }
+
+    // Convenience utility for packing color parameters into a byte array.
+    private byte[] createColorProperty(float r, float g, float b, float a)
+            throws MleRuntimeException
+    {
+        byte[] property = new byte[16];
+
+        int offset = 0;
+        MlMath.convertFloatToByteArray(r, property, offset, ByteOrder.BIG_ENDIAN);
+        offset += 4;
+        MlMath.convertFloatToByteArray(g, property, offset, ByteOrder.BIG_ENDIAN);
+        offset += 4;
+        MlMath.convertFloatToByteArray(b, property, offset, ByteOrder.BIG_ENDIAN);
+        offset += 4;
+        MlMath.convertFloatToByteArray(a, property, offset, ByteOrder.BIG_ENDIAN);
 
         return property;
     }

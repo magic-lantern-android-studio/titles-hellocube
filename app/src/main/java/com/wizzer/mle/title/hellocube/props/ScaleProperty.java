@@ -1,8 +1,10 @@
 // COPYRIGHT_BEGIN
 // COPYRIGHT_END
 
+// Declare package.
 package com.wizzer.mle.title.hellocube.props;
 
+// Import Magic Lantern classes.
 import com.wizzer.mle.parts.IMlePropPart;
 import com.wizzer.mle.runtime.core.IMleObject;
 import com.wizzer.mle.runtime.core.MleActor;

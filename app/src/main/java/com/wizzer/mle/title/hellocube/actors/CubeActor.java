@@ -1,7 +1,13 @@
+// COPYRIGHT_BEGIN
+// COPYRIGHT_END
+
+// Declare package.
 package com.wizzer.mle.title.hellocube.actors;
 
+// Import Android classes.
 import android.os.SystemClock;
 
+// Import Magic Lantern classes.
 import com.wizzer.mle.runtime.core.IMleProp;
 import com.wizzer.mle.runtime.core.MleActor;
 import com.wizzer.mle.runtime.scheduler.MleScheduler;
@@ -241,6 +247,31 @@ public class CubeActor extends MleActor
 
                     // Notify property change listeners.
                     notifyPropertyChange("scale", null, null);
+
+                    return;
+                } else if (name.equals("color"))
+                {
+                    // Read the data in from the input stream.
+                    DataInputStream in = new DataInputStream(property.getStream());
+                    byte[] data = new byte[property.getLength()];
+                    in.readFully(data);
+
+                    // Create a color property and initialize it.
+                    color = new ColorProperty();
+                    float[] rgba = new float[4];
+                    // Expecting 4 floating-point values in stream.
+                    int offset = 0;
+                    rgba[0] = MlMath.convertByteArrayToFloat(data, offset, ByteOrder.BIG_ENDIAN);
+                    offset += 4;
+                    rgba[1] = MlMath.convertByteArrayToFloat(data, offset, ByteOrder.BIG_ENDIAN);
+                    offset += 4;
+                    rgba[2] = MlMath.convertByteArrayToFloat(data, offset, ByteOrder.BIG_ENDIAN);
+                    offset += 4;
+                    rgba[3] = MlMath.convertByteArrayToFloat(data, offset, ByteOrder.BIG_ENDIAN);
+                    color.setProperty(rgba);
+
+                    // Notify property change listeners.
+                    notifyPropertyChange("color", null, null);
 
                     return;
                 }

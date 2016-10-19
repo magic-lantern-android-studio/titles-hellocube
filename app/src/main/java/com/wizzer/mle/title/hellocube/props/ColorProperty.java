@@ -1,17 +1,21 @@
 // COPYRIGHT_BEGIN
 // COPYRIGHT_END
 
+// Declare package.
 package com.wizzer.mle.title.hellocube.props;
 
-import com.wizzer.mle.parts.IMlePropPart;
+// Import Magic Lantern classes.
 import com.wizzer.mle.runtime.core.IMleObject;
 import com.wizzer.mle.runtime.core.MleActor;
 import com.wizzer.mle.runtime.core.MleRuntimeException;
 
+import com.wizzer.mle.parts.IMlePropPart;
+import com.wizzer.mle.title.hellocube.roles.ColorCarrier;
+
 import java.util.Arrays;
 
 /**
- *
+ * This Property is used to change the color on a Actor.
  */
 public class ColorProperty implements IMlePropPart
 {
@@ -58,7 +62,7 @@ public class ColorProperty implements IMlePropPart
 
         if (obj instanceof MleActor) {
             MleActor actor = (MleActor) obj;
-            //retValue = PositionCarrier.set(actor.getRole(), m_values);
+            retValue = ColorCarrier.set(actor.getRole(), m_values);
         }
 
         return retValue;
@@ -74,7 +78,7 @@ public class ColorProperty implements IMlePropPart
 
         if (obj instanceof MleActor) {
             MleActor actor = (MleActor) obj;
-            //retValue = PositionCarrier.get(actor.getRole(), m_values);
+            retValue = ColorCarrier.get(actor.getRole(), m_values);
         }
 
         return retValue;

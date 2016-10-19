@@ -1,14 +1,17 @@
 // COPYRIGHT_BEGIN
 // COPYRIGHT_END
 
+// Declare package.
 package com.wizzer.mle.title.hellocube.props;
 
+// Import Magic Lantern classes.
 import com.wizzer.mle.runtime.core.IMleObject;
 import com.wizzer.mle.runtime.core.MleActor;
 import com.wizzer.mle.runtime.core.MleRuntimeException;
 
 import com.wizzer.mle.parts.IMlePropPart;
 
+// Import title classes.
 import com.wizzer.mle.title.hellocube.roles.PositionCarrier;
 
 import java.util.Arrays;

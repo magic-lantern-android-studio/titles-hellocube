@@ -35,12 +35,15 @@ public class CubeRole extends MleRole implements I3dRole
     /** The cube's rotation property - (angle, x, y, z). */
     protected float[] m_rotation;
 
-    /** The cube's scale property. - (x, y, z) */
+    /** The cube's scale property - (x, y, z) */
     protected float[] m_scale;
+
+    /** The cubes uniform color - (r, g, b, a). */
+    protected float[] m_color;
 
     /* Store our model data in a float buffer. */
     private FloatBuffer m_vertices;
-    private FloatBuffer m_colors;
+    private FloatBuffer m_colorPerVertex;
 
     /* This will be used to pass in the transformation matrix. */
     private int mMVPMatrixHandle;
@@ -73,10 +76,11 @@ public class CubeRole extends MleRole implements I3dRole
         super(actor);
 
         m_vertices = null;
-        m_colors = null;
+        m_colorPerVertex = null;
         m_translation = new float[3];
         m_rotation = new float[4];
         m_scale = new float[3];
+        m_color = new float[4];
     }
 
     @Override
@@ -197,15 +201,15 @@ public class CubeRole extends MleRole implements I3dRole
         m_vertices = ByteBuffer.allocateDirect(cubePositionData.length * mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
         m_vertices.put(cubePositionData).position(0);
 
-        m_colors = ByteBuffer.allocateDirect(cubeColorData.length * mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
-        m_colors.put(cubeColorData).position(0);
+        m_colorPerVertex = ByteBuffer.allocateDirect(cubeColorData.length * mBytesPerFloat).order(ByteOrder.nativeOrder()).asFloatBuffer();
+        m_colorPerVertex.put(cubeColorData).position(0);
     }
 
     @Override
     public void dispose()
     {
         m_vertices = null;
-        m_colors = null;
+        m_colorPerVertex = null;
     }
 
     // This Role does not manage any children.
@@ -306,6 +310,39 @@ public class CubeRole extends MleRole implements I3dRole
      */
     public synchronized float[] getScale()
     { return m_scale; }
+
+    /**
+     * Set the cube's color property.
+     *
+     * @param color An array of four floating-point values representing the
+     * cube's red, green, blue and alpha values to set.
+     */
+    public synchronized void setColor(float[] color)
+    {
+        if ((color != null) && (color.length == 4))
+        {
+            m_color[0] = color[0];  // red
+            m_color[1] = color[1];  // green
+            m_color[2] = color[2];  // blue
+            m_color[3] = color[3];  // alpha
+
+            // Update color buffer.
+            m_colorPerVertex.position(0);
+            for (int i = 0; i < 36; i++) {
+                m_colorPerVertex.position(i * m_color.length);
+                m_colorPerVertex.put(m_color);
+            }
+        }
+    }
+
+    /**
+     * Retrieve the cube's color property.
+     *
+     * @return An array of four floating-point values representing the cube's
+     * color property is returned.
+     */
+    public synchronized float[] getColor()
+    { return m_color; }
 
     /**
      * Retrieve the vertex shader for the cube.
@@ -566,9 +603,9 @@ public class CubeRole extends MleRole implements I3dRole
         GLES20.glEnableVertexAttribArray(mPositionHandle);
 
         // Pass in the color information.
-        m_colors.position(0);
+        m_colorPerVertex.position(0);
         GLES20.glVertexAttribPointer(mColorHandle, mColorDataSize, GLES20.GL_FLOAT, false,
-                0, m_colors);
+                0, m_colorPerVertex);
 
         GLES20.glEnableVertexAttribArray(mColorHandle);
 

@@ -1,8 +1,10 @@
 // COPYRIGHT_BEGIN
 // COPYRIGHT_END
 
+// Declare package.
 package com.wizzer.mle.title.hellocube.roles;
 
+// Import Magic Lantern classes.
 import com.wizzer.mle.runtime.core.IMleRole;
 import com.wizzer.mle.runtime.core.MleRuntimeException;
 
