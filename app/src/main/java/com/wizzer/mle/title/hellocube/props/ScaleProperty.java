@@ -7,11 +7,12 @@ import com.wizzer.mle.parts.IMlePropPart;
 import com.wizzer.mle.runtime.core.IMleObject;
 import com.wizzer.mle.runtime.core.MleActor;
 import com.wizzer.mle.runtime.core.MleRuntimeException;
+import com.wizzer.mle.title.hellocube.roles.ScaleCarrier;
 
 import java.util.Arrays;
 
 /**
- *
+ * This Property is used to perform a scaling transformation.
  */
 public class ScaleProperty implements IMlePropPart
 {
@@ -28,6 +29,15 @@ public class ScaleProperty implements IMlePropPart
 
     /**
      * Get the property value.
+     * <p>
+     * The property is comprised of three floating-point values:
+     * <br>
+     * float[0] = sx
+     * <br>
+     * float[1] = sy
+     * <br>
+     * float[2] = sz
+     * </p>
      *
      * @return An array of <code>float</code> is returned.
      */
@@ -38,6 +48,15 @@ public class ScaleProperty implements IMlePropPart
 
     /**
      * Set the property value.
+     * <p>
+     * The property is comprised of three floating-point values:
+     * <br>
+     * float[0] = sx
+     * <br>
+     * float[1] = sy
+     * <br>
+     * float[2] = sz
+     * </p>
      *
      * @param values This argument should be an array of <code>float</code>.
      */
@@ -58,7 +77,7 @@ public class ScaleProperty implements IMlePropPart
 
         if (obj instanceof MleActor) {
             MleActor actor = (MleActor) obj;
-            //retValue = PositionCarrier.set(actor.getRole(), m_values);
+            retValue = ScaleCarrier.set(actor.getRole(), m_values);
         }
 
         return retValue;
@@ -74,7 +93,7 @@ public class ScaleProperty implements IMlePropPart
 
         if (obj instanceof MleActor) {
             MleActor actor = (MleActor) obj;
-           //retValue = PositionCarrier.get(actor.getRole(), m_values);
+            retValue = ScaleCarrier.get(actor.getRole(), m_values);
         }
 
         return retValue;

@@ -1,8 +1,10 @@
 // COPYRIGHT_BEGIN
 // COPYRIGHT_END
 
+// Declare package.
 package com.wizzer.mle.title.hellocube.props;
 
+// Import Magic Lantern classes
 import com.wizzer.mle.runtime.core.IMleObject;
 import com.wizzer.mle.runtime.core.MleActor;
 import com.wizzer.mle.runtime.core.MleRuntimeException;
@@ -13,7 +15,8 @@ import com.wizzer.mle.title.hellocube.roles.RotationCarrier;
 import java.util.Arrays;
 
 /**
- *
+ * This Property is used to manage parameter values for performing a rotation
+ * about a given axis (x, y, z).
  */
 public class RotationProperty implements IMlePropPart
 {
