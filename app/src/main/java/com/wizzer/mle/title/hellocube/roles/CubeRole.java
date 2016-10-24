@@ -14,6 +14,7 @@ import android.opengl.Matrix;
 import android.util.Log;
 
 // Import Magic Lantern classes.
+import com.wizzer.mle.math.MlTransform;
 import com.wizzer.mle.runtime.core.IMleRole;
 import com.wizzer.mle.runtime.core.MleActor;
 import com.wizzer.mle.runtime.core.MleRole;
@@ -343,6 +344,20 @@ public class CubeRole extends MleRole implements I3dRole
      */
     public synchronized float[] getColor()
     { return m_color; }
+
+    @Override
+    public boolean setTransform(MlTransform transform)
+    {
+        // Not used in this title specific implementation.
+        return false;
+    }
+
+    @Override
+    public boolean getTransform(MlTransform transform)
+    {
+        // Not used in this title specific implementation.
+        return false;
+    }
 
     /**
      * Retrieve the vertex shader for the cube.
