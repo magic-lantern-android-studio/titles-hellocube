@@ -217,7 +217,7 @@ public class HelloCube extends Activity
             cubeActor.setProperty("scale", scaleProp);
 
             // Set the 'color' property on the actor.
-            byte[] color = createColorProperty(1.0F, 1.0F, 1.0F, 1.0F);
+            byte[] color = createColorProperty(1.0F, 0.0F, 0.0F, 1.0F);
             MleProp colorProp = new MleProp(color.length, new ByteArrayInputStream(color));
             cubeActor.setProperty("color", colorProp);
         } catch (MleRuntimeException ex)
